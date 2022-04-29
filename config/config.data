@@ -1,24 +1,29 @@
 [cred1]
+bot_id = bot1
 id = 13864413
 hash = b80d9becde8fc43fc43fd8751f375c9b
 phone = +919289404737
 
 [cred2]
+bot_id = bot2
 id = 9904030
 hash = af1b5a4a287f9a58708b0f7f6ba6425e
 phone = +919289404742
 
 [cred3]
+bot_id = bot3
 id = 11792517
 hash = afe0c13fc739889523aca51ef7060be2
 phone = +919599033658
 
 [cred4]
+bot_id = bot4
 id = 13929053
 hash = ea486737d5e48db2dbb36786eb54d0d3
 phone = +918700590634
 
 [cred5]
+bot_id = bot5
 id = 13446598
 hash = 83396d4da625e66658b061a1fb57e50b
 phone = +919289404741

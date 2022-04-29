@@ -11,11 +11,11 @@ from add_users import add_users
 cpass = configparser.RawConfigParser()
 cpass.read('./config/config.data')
 
-offset = 100
-members = 500
+offset = 1500
+members = 7500
 input_file_name = './config/legal_members.csv'
 target_group_id = '1728042268'
-
+current_bot_id = ""
 try:
     arg1 = int(sys.argv[1])
     start_range = (arg1 - 1) * offset
@@ -24,7 +24,7 @@ try:
     api_hash = cpass['cred' + str(arg1)]['hash']
     phone = cpass['cred' + str(arg1)]['phone']
     client = TelegramClient(phone, api_id, api_hash)
-
+    current_bot_id = '@' + cpass['cred' + str(arg1)]['bot_id']
 except Exception as e:
     os.system('clear')
     print(e)
@@ -70,7 +70,7 @@ for chat in chats:
         if chat.megagroup:
             groups.append(chat)
     except Exception as e:
-        print(str(e))
+        # print(str(e))
         continue
 
 target_group_index = -1
@@ -89,8 +89,7 @@ target_group = groups[int(target_group_index)]
 target_group_entity = InputPeerChannel(target_group.id, target_group.access_hash)
 
 try:
-    add_users(users, client, target_group_entity)
-    # print('done')
+    add_users(users, client, target_group_entity, current_bot_id)
 except Exception as e:
     print(e)
     sys.exit(1)
