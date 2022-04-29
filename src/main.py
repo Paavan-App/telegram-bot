@@ -13,7 +13,7 @@ cpass.read('./config/config.data')
 
 offset = 100
 members = 500
-input_file_name = './config/members.csv'
+input_file_name = './config/legal_members.csv'
 target_group_id = '1728042268'
 
 try:
@@ -32,6 +32,8 @@ except Exception as e:
     print('Syntax: python main.py [cred number]')
     sys.exit(1)
 
+print(start_range, end_range)
+
 client.connect()
 
 if not client.is_user_authorized():
@@ -44,12 +46,11 @@ with open(input_file_name, encoding='UTF-8') as f:
     rows = csv.reader(f, delimiter=",", lineterminator="\n")
     next(rows, None)
     for row in rows:
-        user = {'username': row[0], 'id': int(row[1]), 'access_hash': int(row[2]), 'name': row[3]}
+        user = {'username': row[0], 'id': row[1]}
         users.append(user)
 
 # slice the users array to the selected range
-users = users[start_range:end_range]
-
+users = users[start_range + 1:end_range]
 chats = []
 last_date = None
 chunk_size = 200
@@ -89,6 +90,7 @@ target_group_entity = InputPeerChannel(target_group.id, target_group.access_hash
 
 try:
     add_users(users, client, target_group_entity)
+    # print('done')
 except Exception as e:
     print(e)
     sys.exit(1)
